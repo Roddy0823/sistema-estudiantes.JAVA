@@ -8,7 +8,7 @@ package com.sena.estudiantes.modelo;
  * @version 1.0
  */
 public class Estudiante {
-    
+
     // Atributos privados (Encapsulamiento)
     private int id;
     private String nombre;
@@ -16,14 +16,14 @@ public class Estudiante {
     private String email;
     private String carrera;
     private int semestre;
-    
+
     /**
      * Constructor vacío.
      * Requerido para frameworks y JDBC.
      */
     public Estudiante() {
     }
-    
+
     /**
      * Constructor con todos los parámetros excepto ID.
      * Usado para insertar nuevos estudiantes.
@@ -41,7 +41,7 @@ public class Estudiante {
         this.carrera = carrera;
         this.semestre = semestre;
     }
-    
+
     /**
      * Constructor completo con ID.
      * Usado para recuperar estudiantes de la base de datos.
@@ -61,57 +61,57 @@ public class Estudiante {
         this.carrera = carrera;
         this.semestre = semestre;
     }
-    
+
     // ==================== GETTERS Y SETTERS ====================
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
-    
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public String getApellido() {
         return apellido;
     }
-    
+
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public String getCarrera() {
         return carrera;
     }
-    
+
     public void setCarrera(String carrera) {
         this.carrera = carrera;
     }
-    
+
     public int getSemestre() {
         return semestre;
     }
-    
+
     public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
-    
+
     /**
      * Retorna una representación en String del objeto.
      * Útil para depuración y visualización en consola.
@@ -121,11 +121,10 @@ public class Estudiante {
     @Override
     public String toString() {
         return String.format(
-            "| %-4d | %-15s | %-15s | %-25s | %-20s | %-8d |",
-            id, nombre, apellido, email, carrera, semestre
-        );
+                "| %-3d | %-12s | %-12s | %-20s | %-15s | %-4d |",
+                id, nombre, apellido, email, carrera, semestre);
     }
-    
+
     /**
      * Retorna el nombre completo del estudiante.
      * 

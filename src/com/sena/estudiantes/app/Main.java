@@ -4,11 +4,12 @@ import com.sena.estudiantes.dao.ConexionBD;
 import com.sena.estudiantes.dao.EstudianteDAO;
 import com.sena.estudiantes.modelo.Estudiante;
 import com.sena.estudiantes.util.Constantes;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * Clase principal de la aplicación.
+ * Clase principal de la aplicacion.
  * Proporciona una interfaz de consola (CLI) para gestionar estudiantes.
  * 
  * @author SENA
@@ -20,59 +21,75 @@ public class Main {
     private static EstudianteDAO estudianteDAO;
 
     /**
-     * Método principal de la aplicación.
+     * Metodo principal de la aplicacion.
      * 
-     * @param args Argumentos de línea de comandos (no utilizados)
+     * @param args Argumentos de linea de comandos (no utilizados)
      */
     public static void main(String[] args) {
         System.out.println("\n" + Constantes.SEPARADOR);
-        System.out.println("   SISTEMA DE GESTIÓN DE ESTUDIANTES - SENA");
+        System.out.println("   SISTEMA DE GESTION DE ESTUDIANTES - SENA");
         System.out.println("   Evidencia GA7-220501096-AA2-EV01");
         System.out.println(Constantes.SEPARADOR);
 
-        // Inicializar la conexión y el DAO
+        // Inicializar la conexion y el DAO
         estudianteDAO = new EstudianteDAO();
 
-        // Ejecutar el menú principal
+        // Ejecutar el menu principal
         ejecutarMenuPrincipal();
 
-        // Cerrar la conexión al salir
+        // Cerrar la conexion al salir
         ConexionBD.obtenerInstancia().cerrarConexion();
         scanner.close();
 
-        System.out.println("\n¡Gracias por usar el Sistema de Gestión de Estudiantes!");
+        System.out.println("\nGracias por usar el Sistema de Gestion de Estudiantes!");
     }
 
     /**
-     * Muestra y ejecuta el menú principal de la aplicación.
+     * Muestra y ejecuta el menu principal de la aplicacion.
      */
     private static void ejecutarMenuPrincipal() {
         int opcion;
 
         do {
             mostrarMenu();
-            opcion = leerEntero("Seleccione una opción: ");
+            opcion = leerEntero("Seleccione una opcion: ");
 
             switch (opcion) {
-                case 1 -> registrarEstudiante();
-                case 2 -> listarEstudiantes();
-                case 3 -> buscarPorId();
-                case 4 -> buscarPorNombre();
-                case 5 -> actualizarEstudiante();
-                case 6 -> eliminarEstudiante();
-                case 0 -> System.out.println("\nSaliendo del sistema...");
-                default -> System.out.println("\n✗ Opción no válida. Intente de nuevo.");
+                case 1:
+                    registrarEstudiante();
+                    break;
+                case 2:
+                    listarEstudiantes();
+                    break;
+                case 3:
+                    buscarPorId();
+                    break;
+                case 4:
+                    buscarPorNombre();
+                    break;
+                case 5:
+                    actualizarEstudiante();
+                    break;
+                case 6:
+                    eliminarEstudiante();
+                    break;
+                case 0:
+                    System.out.println("\nSaliendo del sistema...");
+                    break;
+                default:
+                    System.out.println("\n[ERROR] Opcion no valida. Intente de nuevo.");
+                    break;
             }
 
         } while (opcion != 0);
     }
 
     /**
-     * Muestra el menú de opciones.
+     * Muestra el menu de opciones.
      */
     private static void mostrarMenu() {
         System.out.println("\n" + Constantes.SEPARADOR_LINEA);
-        System.out.println("                         MENÚ PRINCIPAL");
+        System.out.println("                         MENU PRINCIPAL");
         System.out.println(Constantes.SEPARADOR_LINEA);
         System.out.println("  1. Registrar nuevo estudiante");
         System.out.println("  2. Listar todos los estudiantes");
@@ -88,7 +105,7 @@ public class Main {
 
     /**
      * Registra un nuevo estudiante en el sistema.
-     * Implementa la operación CREATE.
+     * Implementa la operacion CREATE.
      */
     private static void registrarEstudiante() {
         System.out.println("\n--- REGISTRAR NUEVO ESTUDIANTE ---\n");
@@ -104,13 +121,13 @@ public class Main {
         if (estudianteDAO.insertar(estudiante)) {
             System.out.println("\n" + Constantes.MSG_EXITO_INSERTAR);
         } else {
-            System.out.println("\n✗ Error al registrar el estudiante.");
+            System.out.println("\n[ERROR] Error al registrar el estudiante.");
         }
     }
 
     /**
      * Lista todos los estudiantes registrados.
-     * Implementa la operación READ (todos).
+     * Implementa la operacion READ (todos).
      */
     private static void listarEstudiantes() {
         System.out.println("\n--- LISTA DE ESTUDIANTES ---\n");
@@ -127,7 +144,7 @@ public class Main {
 
     /**
      * Busca un estudiante por su ID.
-     * Implementa la operación READ (por ID).
+     * Implementa la operacion READ (por ID).
      */
     private static void buscarPorId() {
         System.out.println("\n--- BUSCAR ESTUDIANTE POR ID ---\n");
@@ -137,7 +154,9 @@ public class Main {
 
         if (estudiante != null) {
             System.out.println("\nEstudiante encontrado:");
-            mostrarTablaEstudiantes(List.of(estudiante));
+            List<Estudiante> lista = new ArrayList<>();
+            lista.add(estudiante);
+            mostrarTablaEstudiantes(lista);
         } else {
             System.out.println("\n" + Constantes.MSG_NO_ENCONTRADO);
         }
@@ -145,7 +164,7 @@ public class Main {
 
     /**
      * Busca estudiantes por nombre o apellido.
-     * Implementa la operación READ (búsqueda LIKE).
+     * Implementa la operacion READ (busqueda LIKE).
      */
     private static void buscarPorNombre() {
         System.out.println("\n--- BUSCAR ESTUDIANTES POR NOMBRE ---\n");
@@ -164,7 +183,7 @@ public class Main {
 
     /**
      * Actualiza los datos de un estudiante existente.
-     * Implementa la operación UPDATE.
+     * Implementa la operacion UPDATE.
      */
     private static void actualizarEstudiante() {
         System.out.println("\n--- ACTUALIZAR ESTUDIANTE ---\n");
@@ -178,25 +197,31 @@ public class Main {
         }
 
         System.out.println("\nDatos actuales:");
-        mostrarTablaEstudiantes(List.of(estudiante));
+        List<Estudiante> lista = new ArrayList<>();
+        lista.add(estudiante);
+        mostrarTablaEstudiantes(lista);
 
-        System.out.println("\nIngrese los nuevos datos (deje vacío para mantener el valor actual):\n");
+        System.out.println("\nIngrese los nuevos datos (deje vacio para mantener el valor actual):\n");
 
         String nombre = leerTextoOpcional("Nombre [" + estudiante.getNombre() + "]: ");
-        if (!nombre.isEmpty())
+        if (!nombre.isEmpty()) {
             estudiante.setNombre(nombre);
+        }
 
         String apellido = leerTextoOpcional("Apellido [" + estudiante.getApellido() + "]: ");
-        if (!apellido.isEmpty())
+        if (!apellido.isEmpty()) {
             estudiante.setApellido(apellido);
+        }
 
         String email = leerTextoOpcional("Email [" + estudiante.getEmail() + "]: ");
-        if (!email.isEmpty())
+        if (!email.isEmpty()) {
             estudiante.setEmail(email);
+        }
 
         String carrera = leerTextoOpcional("Carrera [" + estudiante.getCarrera() + "]: ");
-        if (!carrera.isEmpty())
+        if (!carrera.isEmpty()) {
             estudiante.setCarrera(carrera);
+        }
 
         String semestreStr = leerTextoOpcional("Semestre [" + estudiante.getSemestre() + "]: ");
         if (!semestreStr.isEmpty()) {
@@ -212,13 +237,13 @@ public class Main {
         if (estudianteDAO.actualizar(estudiante)) {
             System.out.println("\n" + Constantes.MSG_EXITO_ACTUALIZAR);
         } else {
-            System.out.println("\n✗ Error al actualizar el estudiante.");
+            System.out.println("\n[ERROR] Error al actualizar el estudiante.");
         }
     }
 
     /**
      * Elimina un estudiante del sistema.
-     * Implementa la operación DELETE.
+     * Implementa la operacion DELETE.
      */
     private static void eliminarEstudiante() {
         System.out.println("\n--- ELIMINAR ESTUDIANTE ---\n");
@@ -231,8 +256,10 @@ public class Main {
             return;
         }
 
-        System.out.println("\n¿Está seguro de eliminar al estudiante?");
-        mostrarTablaEstudiantes(List.of(estudiante));
+        System.out.println("\nEsta seguro de eliminar al estudiante?");
+        List<Estudiante> lista = new ArrayList<>();
+        lista.add(estudiante);
+        mostrarTablaEstudiantes(lista);
 
         String confirmacion = leerTexto("\nEscriba 'SI' para confirmar: ");
 
@@ -240,14 +267,14 @@ public class Main {
             if (estudianteDAO.eliminar(id)) {
                 System.out.println("\n" + Constantes.MSG_EXITO_ELIMINAR);
             } else {
-                System.out.println("\n✗ Error al eliminar el estudiante.");
+                System.out.println("\n[ERROR] Error al eliminar el estudiante.");
             }
         } else {
-            System.out.println("\nOperación cancelada.");
+            System.out.println("\nOperacion cancelada.");
         }
     }
 
-    // ==================== MÉTODOS AUXILIARES ====================
+    // ==================== METODOS AUXILIARES ====================
 
     /**
      * Muestra una tabla formateada con los estudiantes.
@@ -278,7 +305,7 @@ public class Main {
             System.out.print(mensaje);
             texto = scanner.nextLine().trim();
             if (texto.isEmpty()) {
-                System.out.println("✗ Este campo es obligatorio.");
+                System.out.println("[ERROR] Este campo es obligatorio.");
             }
         } while (texto.isEmpty());
         return texto;
@@ -288,7 +315,7 @@ public class Main {
      * Lee un texto opcional del usuario.
      * 
      * @param mensaje Mensaje a mostrar
-     * @return Texto ingresado (puede estar vacío)
+     * @return Texto ingresado (puede estar vacio)
      */
     private static String leerTextoOpcional(String mensaje) {
         System.out.print(mensaje);
@@ -296,10 +323,10 @@ public class Main {
     }
 
     /**
-     * Lee un número entero del usuario.
+     * Lee un numero entero del usuario.
      * 
      * @param mensaje Mensaje a mostrar
-     * @return Número entero ingresado
+     * @return Numero entero ingresado
      */
     private static int leerEntero(String mensaje) {
         while (true) {
@@ -308,18 +335,18 @@ public class Main {
                 int numero = Integer.parseInt(scanner.nextLine().trim());
                 return numero;
             } catch (NumberFormatException e) {
-                System.out.println("✗ Debe ingresar un número válido.");
+                System.out.println("[ERROR] Debe ingresar un numero valido.");
             }
         }
     }
 
     /**
-     * Lee un número entero dentro de un rango específico.
+     * Lee un numero entero dentro de un rango especifico.
      * 
      * @param mensaje Mensaje a mostrar
-     * @param min     Valor mínimo permitido
-     * @param max     Valor máximo permitido
-     * @return Número entero en el rango
+     * @param min     Valor minimo permitido
+     * @param max     Valor maximo permitido
+     * @return Numero entero en el rango
      */
     private static int leerEnteroEnRango(String mensaje, int min, int max) {
         while (true) {
@@ -327,7 +354,7 @@ public class Main {
             if (numero >= min && numero <= max) {
                 return numero;
             }
-            System.out.println("✗ El valor debe estar entre " + min + " y " + max + ".");
+            System.out.println("[ERROR] El valor debe estar entre " + min + " y " + max + ".");
         }
     }
 }

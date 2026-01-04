@@ -28,20 +28,20 @@ public class ConexionBD {
             // Cargar el driver JDBC de SQLite
             Class.forName(Constantes.DRIVER_JDBC);
 
-            // Establecer la conexión
+            // Establecer la conexion
             conexion = DriverManager.getConnection(Constantes.DB_URL);
 
             // Crear la tabla si no existe
             crearTablaEstudiantes();
 
-            System.out.println("✓ Conexión a la base de datos establecida correctamente.");
+            System.out.println("[OK] Conexion a la base de datos establecida correctamente.");
 
         } catch (ClassNotFoundException e) {
-            System.err.println("✗ Error: Driver JDBC no encontrado.");
-            System.err.println("  Asegúrese de incluir sqlite-jdbc.jar en el classpath.");
+            System.err.println("[ERROR] Driver JDBC no encontrado.");
+            System.err.println("  Asegurese de incluir sqlite-jdbc.jar en el classpath.");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.err.println("✗ Error al conectar con la base de datos:");
+            System.err.println("[ERROR] Error al conectar con la base de datos:");
             e.printStackTrace();
         }
     }
@@ -65,12 +65,12 @@ public class ConexionBD {
      */
     public Connection obtenerConexion() {
         try {
-            // Verificar si la conexión está cerrada y reconectar
+            // Verificar si la conexion esta cerrada y reconectar
             if (conexion == null || conexion.isClosed()) {
                 conexion = DriverManager.getConnection(Constantes.DB_URL);
             }
         } catch (SQLException e) {
-            System.err.println("✗ Error al verificar/reconectar la conexión:");
+            System.err.println("[ERROR] Error al verificar/reconectar la conexion:");
             e.printStackTrace();
         }
         return conexion;
@@ -83,10 +83,10 @@ public class ConexionBD {
         try {
             if (conexion != null && !conexion.isClosed()) {
                 conexion.close();
-                System.out.println("✓ Conexión a la base de datos cerrada correctamente.");
+                System.out.println("[OK] Conexion a la base de datos cerrada correctamente.");
             }
         } catch (SQLException e) {
-            System.err.println("✗ Error al cerrar la conexión:");
+            System.err.println("[ERROR] Error al cerrar la conexion:");
             e.printStackTrace();
         }
     }
@@ -99,7 +99,7 @@ public class ConexionBD {
         try (Statement statement = conexion.createStatement()) {
             statement.execute(Constantes.SQL_CREAR_TABLA);
         } catch (SQLException e) {
-            System.err.println("✗ Error al crear la tabla de estudiantes:");
+            System.err.println("[ERROR] Error al crear la tabla de estudiantes:");
             e.printStackTrace();
         }
     }

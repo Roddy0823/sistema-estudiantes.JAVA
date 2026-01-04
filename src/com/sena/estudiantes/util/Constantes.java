@@ -54,22 +54,22 @@ public final class Constantes {
 
     // ==================== MENSAJES DEL SISTEMA ====================
 
-    public static final String MSG_EXITO_INSERTAR = "✓ Estudiante registrado exitosamente.";
-    public static final String MSG_EXITO_ACTUALIZAR = "✓ Estudiante actualizado exitosamente.";
-    public static final String MSG_EXITO_ELIMINAR = "✓ Estudiante eliminado exitosamente.";
-    public static final String MSG_ERROR_CONEXION = "✗ Error al conectar con la base de datos.";
-    public static final String MSG_NO_ENCONTRADO = "✗ Estudiante no encontrado.";
+    public static final String MSG_EXITO_INSERTAR = "[OK] Estudiante registrado exitosamente.";
+    public static final String MSG_EXITO_ACTUALIZAR = "[OK] Estudiante actualizado exitosamente.";
+    public static final String MSG_EXITO_ELIMINAR = "[OK] Estudiante eliminado exitosamente.";
+    public static final String MSG_ERROR_CONEXION = "[ERROR] Error al conectar con la base de datos.";
+    public static final String MSG_NO_ENCONTRADO = "[ERROR] Estudiante no encontrado.";
     public static final String MSG_LISTA_VACIA = "No hay estudiantes registrados.";
 
-    // ==================== CONFIGURACIÓN DE INTERFAZ ====================
+    // ==================== CONFIGURACION DE INTERFAZ ====================
 
-    public static final String SEPARADOR = "=".repeat(100);
-    public static final String SEPARADOR_LINEA = "-".repeat(100);
+    public static final String SEPARADOR = "=".repeat(80);
+    public static final String SEPARADOR_LINEA = "-".repeat(80);
 
     /** Encabezado de la tabla de estudiantes */
     public static final String ENCABEZADO_TABLA = String.format(
-            "| %-4s | %-15s | %-15s | %-25s | %-20s | %-8s |",
-            "ID", "NOMBRE", "APELLIDO", "EMAIL", "CARRERA", "SEMESTRE");
+            "| %-3s | %-12s | %-12s | %-20s | %-15s | %-4s |",
+            "ID", "NOMBRE", "APELLIDO", "EMAIL", "CARRERA", "SEM");
 
     // Constructor privado para evitar instanciación
     private Constantes() {
