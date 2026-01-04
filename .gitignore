@@ -1,0 +1,24 @@
+# Archivos compilados
+*.class
+out/
+
+# Base de datos
+*.db
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+.classpath
+.project
+.settings/
+*.launch
+bin/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
